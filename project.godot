@@ -10,7 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Godot Fixed Third Person Camera "
+config/name="Godot Fixed Third Person Camera - Rotates Player"
+config/description="The player will rotate in the direction of movement."
 run/main_scene="res://test_level/test_environment.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://test_level/icon.svg"

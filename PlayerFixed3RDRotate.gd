@@ -12,6 +12,7 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+		
 
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
@@ -26,8 +27,19 @@ func _physics_process(delta):
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
+		
+		# Rotate the player body in the direction of movement
+		$Body.look_at(global_position - velocity, Vector3.UP)
+		
+		# Ensure that the player body does not rotate around the x axis.
+		$Body.rotation_degrees.x = 0
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-
+		
 	move_and_slide()
+
+
+# Respawn the player on death
+func respawn():
+	global_position = Vector3(0,5,0)
