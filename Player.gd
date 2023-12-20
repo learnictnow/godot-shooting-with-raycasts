@@ -7,6 +7,10 @@ const JUMP_VELOCITY = 4.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+var pickup_score_yellow = 0
+var pickup_score_green = 0
+var pickup_score_blue = 0
+
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -43,3 +47,19 @@ func _physics_process(delta):
 # Respawn the player on death
 func respawn():
 	global_position = Vector3(0,5,0)
+
+
+func pickup_item(item_type):
+	var value = 0
+	if item_type == "YELLOW":
+		pickup_score_yellow += 1
+		value = pickup_score_yellow
+	elif item_type == "GREEN":
+		pickup_score_green += 1
+		value = pickup_score_green
+	elif item_type == "BLUE":
+		pickup_score_blue += 1
+		value = pickup_score_blue
+	
+	if $PlayerHud.has_method("update_score"):
+		$PlayerHud.update_score(item_type, value)
