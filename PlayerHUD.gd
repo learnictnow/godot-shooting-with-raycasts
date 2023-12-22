@@ -19,3 +19,8 @@ func update_score(score_colour, value):
 		$HBoxContainer/PanelGreen/ScoreLabelGreen.text = "  Score: " + str(value)
 	if score_colour == "BLUE":
 		$HBoxContainer/PanelBlue/ScoreLabelBlue.text = "  Score: " + str(value)
+	if score_colour == "SHOTS":
+		$HBoxContainer/PanelTargets/ScoreLabel.text = "  Score: " + str(value)
+
+func setup(player_name):
+	$HBoxContainer/LabelName.text = player_name

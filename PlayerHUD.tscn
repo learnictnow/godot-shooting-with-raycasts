@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://d11lrjq0ie65v"]
+[gd_scene load_steps=6 format=3 uid="uid://d11lrjq0ie65v"]
 
 [ext_resource type="Script" path="res://PlayerHUD.gd" id="1_v0qo3"]
 
@@ -10,6 +10,9 @@ bg_color = Color(0, 0.482353, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nuh7w"]
 bg_color = Color(0, 0, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n4wcb"]
+bg_color = Color(1, 0, 0, 1)
 
 [node name="PlayerHud" type="Control"]
 layout_mode = 3
@@ -24,6 +27,10 @@ script = ExtResource("1_v0qo3")
 layout_mode = 0
 offset_right = 424.0
 offset_bottom = 40.0
+
+[node name="LabelName" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Player NAME"
 
 [node name="PanelYellow" type="Panel" parent="HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
@@ -64,6 +71,22 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_nuh7w")
 
 [node name="ScoreLabelBlue" type="Label" parent="HBoxContainer/PanelBlue"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_right = 48.0
+offset_bottom = 11.5
+grow_vertical = 2
+text = "  Score:"
+
+[node name="PanelTargets" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_n4wcb")
+
+[node name="ScoreLabel" type="Label" parent="HBoxContainer/PanelTargets"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5

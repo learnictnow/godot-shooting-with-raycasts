@@ -4,13 +4,20 @@ extends CharacterBody3D
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
+const RAY_LENGTH = 1000
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var pickup_score_yellow = 0
 var pickup_score_green = 0
 var pickup_score_blue = 0
+var score = 0
+var player_name = "Player Tahi"
 
+func _ready():
+	if $PlayerHud.has_method("setup"):
+		$PlayerHud.setup(player_name)
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -63,3 +70,26 @@ func pickup_item(item_type):
 	
 	if $PlayerHud.has_method("update_score"):
 		$PlayerHud.update_score(item_type, value)
+
+func _input(event):
+	if event.is_action_pressed("shoot"):
+		shoot()
+
+func shoot():
+	print("Shots fired")
+	var space = get_world_3d().direct_space_state
+	#var query = PhysicsRayQueryParameters3D.create($CameraPivot/Camera3D.global_position,
+	#		$CameraPivot/Camera3D.global_position - $CameraPivot/Camera3D.global_transform.basis.z * 100)
+	var query = PhysicsRayQueryParameters3D.create($Body/ShotSpawnPosition.global_position, -$Body/ShotSpawnPosition.global_position * RAY_LENGTH)
+	#var query = PhysicsRayQueryParameters3D.create($Body/ShotSpawnPosition.position, Vector3.ZERO)
+	query.collide_with_areas = true
+	
+	
+	
+	var collision = space.intersect_ray(query)
+	if collision:
+		#$CanvasLayer/Label.text = collision.collider.name
+		if collision.collider.is_in_group("Target"):
+			collision.collider.queue_free()
+	else:
+		print("Missed")

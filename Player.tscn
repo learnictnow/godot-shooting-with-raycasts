@@ -42,6 +42,9 @@ layers = 2
 mesh = SubResource("CapsuleMesh_utock")
 surface_material_override/0 = SubResource("StandardMaterial3D_odvdh")
 
+[node name="ShotSpawnPosition" type="Node3D" parent="Body"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6.55671e-08, 1, 0.75)
+
 [node name="Head" type="MeshInstance3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 layers = 2

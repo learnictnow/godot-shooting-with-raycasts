@@ -1,8 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://dowvk531n4y5x"]
+[gd_scene load_steps=29 format=3 uid="uid://dowvk531n4y5x"]
 
 [ext_resource type="Script" path="res://test_level/RespawnArea.gd" id="1_l3d50"]
 [ext_resource type="PackedScene" uid="uid://c4dyfiufsjalg" path="res://Player.tscn" id="2_lj6sm"]
 [ext_resource type="PackedScene" uid="uid://cupj34l6vh2rn" path="res://pickup.tscn" id="3_pigwq"]
+[ext_resource type="PackedScene" uid="uid://dpuc3smmumpis" path="res://target.tscn" id="4_45xv3"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_m2n6p"]
 size = Vector3(2, 1, 2)
@@ -384,5 +385,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 8)
 [node name="Pickup4" parent="." instance=ExtResource("3_pigwq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, -8)
 pickup_colour_type = "BLUE"
+
+[node name="Target" parent="." instance=ExtResource("4_45xv3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2353, 0.5, 0.470042)
 
 [connection signal="body_entered" from="RespawnArea/MeshInstance3D/Area3D" to="RespawnArea" method="_on_area_3d_body_entered"]
