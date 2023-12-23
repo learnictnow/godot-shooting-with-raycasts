@@ -84,11 +84,7 @@ func shoot():
 	#		$CameraPivot/Camera3D.global_position - $CameraPivot/Camera3D.global_transform.basis.z * 100)
 	var query = PhysicsRayQueryParameters3D.create($Body/ShotSpawnPosition.global_position, $Body/ShotSpawnPosition.global_position - $Body/ShotSpawnPosition.global_transform.basis.z * RAY_LENGTH)
 	
-	var cur_bomb = load(bomb)
-	var bomb_instance = cur_bomb.instantiate()
 	
-	bomb_instance.global_position = $Body/ShotSpawnPosition.global_position - $Body/ShotSpawnPosition.global_transform.basis.z * RAY_LENGTH
-	get_tree().get_root().add_child(bomb_instance)
 	
 	#var query = PhysicsRayQueryParameters3D.create($Body/ShotSpawnPosition.position, Vector3.ZERO)
 	query.collide_with_areas = true
@@ -101,5 +97,15 @@ func shoot():
 		print(collision.collider.name)
 		if collision.collider.is_in_group("Target"):
 			collision.collider.queue_free()
+			if $PlayerHud.has_method("update_score"):
+				$PlayerHud.update_score("SHOTS", 1)
 	else:
 		print("Missed")
+
+
+func spawn_bomb():
+	var cur_bomb = load(bomb)
+	var bomb_instance = cur_bomb.instantiate()
+	
+	bomb_instance.global_position = $Body/ShotSpawnPosition.global_position
+	get_tree().get_root().add_child(bomb_instance)
